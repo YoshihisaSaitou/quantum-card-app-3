@@ -1,0 +1,87 @@
+2024/12/27 18:02:41 [notice] 1#1: using the "epoll" event method
+2024/12/27 18:02:41 [notice] 1#1: nginx/1.27.3
+2024/12/27 18:02:41 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/12/27 18:02:41 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2024/12/27 18:02:41 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:524288
+2024/12/27 18:02:41 [notice] 1#1: start worker processes
+2024/12/27 18:02:41 [notice] 1#1: start worker process 20
+2024/12/27 18:02:41 [notice] 1#1: start worker process 21
+2024/12/27 18:02:41 [notice] 1#1: start worker process 22
+2024/12/27 18:02:41 [notice] 1#1: start worker process 23
+2024/12/27 18:02:41 [notice] 1#1: start worker process 24
+2024/12/27 18:02:41 [notice] 1#1: start worker process 25
+2024/12/27 18:02:41 [notice] 1#1: start worker process 26
+2024/12/27 18:02:41 [notice] 1#1: start worker process 27
+2025/04/27 20:46:22 [notice] 1#1: using the "epoll" event method
+2025/04/27 20:46:22 [notice] 1#1: nginx/1.27.3
+2025/04/27 20:46:22 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/04/27 20:46:22 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2025/04/27 20:46:22 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:1048576
+2025/04/27 20:46:22 [notice] 1#1: start worker processes
+2025/04/27 20:46:22 [notice] 1#1: start worker process 20
+2025/04/27 20:46:22 [notice] 1#1: start worker process 21
+2025/04/27 20:46:22 [notice] 1#1: start worker process 22
+2025/04/27 20:46:22 [notice] 1#1: start worker process 23
+2025/04/27 20:46:22 [notice] 1#1: start worker process 24
+2025/04/27 20:46:22 [notice] 1#1: start worker process 25
+2025/04/27 20:46:22 [notice] 1#1: start worker process 26
+2025/04/27 20:46:22 [notice] 1#1: start worker process 27
+2025/05/06 16:30:29 [error] 21#21: *303 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:05:37 [error] 21#21: *312 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:09:44 [error] 21#21: *314 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:12:48 [error] 22#22: *316 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:16:55 [error] 22#22: *318 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:16:59 [error] 22#22: *318 open() "/var/www/nextjs/out/images/75.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /images/75.jpg HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2025/05/06 17:20:24 [error] 22#22: *320 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:24:48 [error] 23#23: *322 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:25:28 [error] 23#23: *322 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:27:11 [error] 23#23: *324 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:36:41 [error] 23#23: *326 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:36:55 [error] 23#23: *326 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:37:12 [error] 23#23: *326 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:42:51 [error] 23#23: *329 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:43:38 [error] 23#23: *329 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:46:21 [error] 23#23: *331 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:56:03 [error] 24#24: *333 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 17:59:49 [error] 24#24: *335 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 18:01:57 [error] 24#24: *337 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 18:11:23 [error] 24#24: *339 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/06 18:16:38 [error] 24#24: *342 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/09 21:01:24 [error] 24#24: *344 open() "/var/www/nextjs/out/.well-known/appspecific/com.chrome.devtools.json" failed (2: No such file or directory), client: 172.23.0.1, server: localhost, request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", host: "localhost"
+2025/05/10 20:40:38 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2025/05/10 20:40:38 [notice] 20#20: gracefully shutting down
+2025/05/10 20:40:38 [notice] 24#24: gracefully shutting down
+2025/05/10 20:40:38 [notice] 21#21: gracefully shutting down
+2025/05/10 20:40:38 [notice] 22#22: gracefully shutting down
+2025/05/10 20:40:38 [notice] 25#25: gracefully shutting down
+2025/05/10 20:40:38 [notice] 26#26: gracefully shutting down
+2025/05/10 20:40:38 [notice] 23#23: gracefully shutting down
+2025/05/10 20:40:38 [notice] 27#27: gracefully shutting down
+2025/05/10 20:40:38 [notice] 20#20: exiting
+2025/05/10 20:40:38 [notice] 24#24: exiting
+2025/05/10 20:40:38 [notice] 22#22: exiting
+2025/05/10 20:40:38 [notice] 26#26: exiting
+2025/05/10 20:40:38 [notice] 21#21: exiting
+2025/05/10 20:40:38 [notice] 25#25: exiting
+2025/05/10 20:40:38 [notice] 23#23: exiting
+2025/05/10 20:40:38 [notice] 26#26: exit
+2025/05/10 20:40:38 [notice] 27#27: exiting
+2025/05/10 20:40:38 [notice] 25#25: exit
+2025/05/10 20:40:38 [notice] 20#20: exit
+2025/05/10 20:40:38 [notice] 24#24: exit
+2025/05/10 20:40:38 [notice] 21#21: exit
+2025/05/10 20:40:38 [notice] 22#22: exit
+2025/05/10 20:40:38 [notice] 23#23: exit
+2025/05/10 20:40:38 [notice] 27#27: exit
+2025/05/10 20:40:38 [notice] 1#1: signal 17 (SIGCHLD) received from 23
+2025/05/10 20:40:38 [notice] 1#1: worker process 22 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 23 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 24 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 25 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 26 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 27 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/10 20:40:38 [notice] 1#1: signal 17 (SIGCHLD) received from 27
+2025/05/10 20:40:38 [notice] 1#1: worker process 20 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: worker process 21 exited with code 0
+2025/05/10 20:40:38 [notice] 1#1: exit

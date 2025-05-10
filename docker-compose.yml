@@ -1,0 +1,25 @@
+services:
+  nginx:
+    image: nginx:1.27
+    working_dir: /var/www
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+    environment:
+      TZ: "Asia/Tokyo"
+    tty: true
+  nextjs:
+    image: node:22.12.0
+    working_dir: /var/www/nextjs
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./nextjs:/var/www/nextjs
+      - /var/www/nextjs/node_modules
+    environment:
+      TZ: "Asia/Tokyo"
+    tty: true
