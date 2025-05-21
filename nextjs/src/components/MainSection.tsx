@@ -1,11 +1,24 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import CardList from '../components/CardList';
 
-export default function MainSection() {
+export type MainSectionHandle = {
+    handleShuffle: () => void;
+};
+
+const MainSection = forwardRef<MainSectionHandle>((_, ref) => {
     const mainRef = useRef<HTMLElement | null>(null);
     const [showCard, setShowCard] = useState(false);
+    const cardListRef = useRef<{ shuffleCards: () => void } | null>(null);
+
+    useImperativeHandle(ref, () => ({
+        handleShuffle: () => {
+            if (cardListRef.current) {
+                cardListRef.current.shuffleCards();
+            }
+        }
+    }));
 
     useEffect(() => {
         if (mainRef.current) {
@@ -22,9 +35,11 @@ export default function MainSection() {
 
     return (
         <main ref={mainRef} className="relative">
-            {showCard &&
-                <CardList />
-            }
+            {showCard && <CardList ref={cardListRef} />}
         </main>
     );
-}
+});
+
+MainSection.displayName = 'MainSection';
+
+export default MainSection;

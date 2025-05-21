@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { getRandom } from '@/lib/RandomValueGenerationUtility';
 import { getCardBackFileName, getCardList } from '@/lib/QuantumCardUtility';
 import { getPointerPosition } from '@/lib/EventUtility';
@@ -14,12 +14,16 @@ type CardData = {
     left: string;
     width: string;
     transform: string;
+    zIndex: number;
 }
 
-export default function CardList() {
+export type CardListHandle = {
+    shuffleCards: () => void;
+};
+
+const CardList = forwardRef<CardListHandle>((_, ref) => {
     const [cardList, setCardList] = useState<CardData[]>([]);
-    //const [windowInnerWidth, setWindowInnerWidth] = useState<number>(0);
-    //const [windowInnerHeight, setWindowInnerHeight] = useState<number>(0);
+    const [isShuffling, setIsShuffling] = useState<boolean>(false);
     const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
     const [zIndexCount, setZIndexCount] = useState<number>(1);
     const [startMouseDownX, setStartMouseDownX] = useState<number>(0);
@@ -27,11 +31,13 @@ export default function CardList() {
     const [startMouseDownTop, setStartMouseDownTop] = useState<number>(0);
     const [startMouseDownLeft, setStartMouseDownLeft] = useState<number>(0);
 
+    useImperativeHandle(ref, () => ({
+        shuffleCards
+    }));
+
     useEffect(() => {
         const innerWidth = window.innerWidth;
         const innerHeight = window.innerHeight;
-        //setWindowInnerWidth(innerWidth);
-        //setWindowInnerHeight(innerHeight);
 
         // カード初期化
         const tmpList = getCardList();
@@ -40,23 +46,44 @@ export default function CardList() {
             top: `${getRandom(0, innerWidth / 2)}px`,
             left: `${getRandom(0, innerHeight / 2)}px`,
             width: `100px`,
-            transform: `0deg`,//`rotate(${getRandom(0, 360)}deg)`,
+            transform: `0deg`,
+            zIndex: getRandom(1, 100)
         }));
 
         setCardList(dataList);
     }, []);
 
+    const shuffleCards = () => {
+        if (isShuffling) return;
+        setIsShuffling(true);
+
+        const innerWidth = window.innerWidth;
+        const innerHeight = window.innerHeight;
+
+        // アニメーション用の新しい位置を生成
+        const newCardList = cardList.map(card => ({
+            ...card,
+            top: `${getRandom(0, innerWidth / 2)}px`,
+            left: `${getRandom(0, innerHeight / 2)}px`,
+            transform: `rotate(${getRandom(0, 360)}deg)`,
+            zIndex: getRandom(1, 100)
+        }));
+
+        setCardList(newCardList);
+
+        // アニメーション完了後に状態をリセット
+        setTimeout(() => {
+            setIsShuffling(false);
+        }, 1000);
+    };
+
     function handleMouseDown(e: React.MouseEvent | React.TouchEvent | React.PointerEvent) {
-        //console.log('handleMouseDown');
-        //console.log(e);
         if (e.nativeEvent instanceof MouseEvent) {
             e.preventDefault();
         }
         e.stopPropagation();
         setIsMouseDown(true);
         const target = e.currentTarget as HTMLImageElement;
-        //console.log(target);
-        //console.log(target.style);
         const { pageX, pageY } = getPointerPosition(e);
         setStartMouseDownX(pageX);
         setStartMouseDownY(pageY);
@@ -67,23 +94,15 @@ export default function CardList() {
     }
 
     function handleMouseMove(e: React.MouseEvent | React.TouchEvent | React.PointerEvent) {
-        //console.log('handleMouseMove');
         if (!isMouseDown) return;
         e.stopPropagation();
-        //console.log('handleMouseMove isMouseDown');
         const { pageX, pageY } = getPointerPosition(e);
         const target = e.currentTarget as HTMLImageElement;
         target.style.left = `${startMouseDownLeft - (startMouseDownX - pageX)}px`;
         target.style.top = `${startMouseDownTop - (startMouseDownY - pageY)}px`;
-        //console.log('handleMouseMove startMouseDownLeft', startMouseDownLeft);
-        //console.log('handleMouseMove startMouseDownX', startMouseDownX);
-        //console.log('handleMouseMove pageX', pageX);
-        //console.log('handleMouseMove target.style.left', target.style.left);
-        //console.log('handleMouseMove target.style.top', target.style.top);
     }
 
     function handleMouseUp(e: React.MouseEvent | React.TouchEvent | React.PointerEvent) {
-        //console.log('handleMouseUp');
         if (!isMouseDown) return;
         e.stopPropagation();
         setIsMouseDown(false);
@@ -91,21 +110,11 @@ export default function CardList() {
         const target = e.currentTarget as HTMLImageElement;
         target.style.left = `${startMouseDownLeft - (startMouseDownX - pageX)}px`;
         target.style.top = `${startMouseDownTop - (startMouseDownY - pageY)}px`;
-        //console.log('handleMouseUp startMouseDownLeft', startMouseDownLeft);
-        //console.log('handleMouseUp startMouseDownX', startMouseDownX);
-        //console.log('handleMouseUp pageX', pageX);
-        //console.log('handleMouseUp target.style.left', target.style.left);
-        //console.log('handleMouseUp target.style.top', target.style.top);
     }
 
     function handleDoubleClick(e: React.MouseEvent | React.TouchEvent | React.PointerEvent, index: number) {
-        //console.log('handleDoubleClick');
         e.stopPropagation();
         const target = e.currentTarget as HTMLImageElement;
-        //console.log(target);
-        //console.log(target.src);
-        //console.log(index);
-        //console.log(cardList[index]);
         target.src = target.src.includes(getCardBackFileName()) ? cardList[index].face_up_file_name : getCardBackFileName();
     }
 
@@ -126,8 +135,14 @@ export default function CardList() {
                     left={value.left}
                     width={value.width}
                     transform={value.transform}
+                    isShuffling={isShuffling}
+                    zIndex={value.zIndex}
                 />
             ))}
         </>
     );
-}
+});
+
+CardList.displayName = 'CardList';
+
+export default CardList;
