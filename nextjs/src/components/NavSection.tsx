@@ -16,6 +16,7 @@ export default function NavSection({ onShuffle }: NavSectionProps) {
                         混ぜる
                     </li>
                     <li className="cursor-pointer hover:text-blue-500 transition-colors">束ねる</li>
+                    <li className="cursor-pointer hover:text-blue-500 transition-colors">縦にする</li>
                 </ul>
             </nav>
         </div>

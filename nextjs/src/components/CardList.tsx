@@ -25,7 +25,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     const [cardList, setCardList] = useState<CardData[]>([]);
     const [isShuffling, setIsShuffling] = useState<boolean>(false);
     const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
-    const [zIndexCount, setZIndexCount] = useState<number>(1);
+    const [zIndexCount, setZIndexCount] = useState<number>(200);
     const [startMouseDownX, setStartMouseDownX] = useState<number>(0);
     const [startMouseDownY, setStartMouseDownY] = useState<number>(0);
     const [startMouseDownTop, setStartMouseDownTop] = useState<number>(0);
