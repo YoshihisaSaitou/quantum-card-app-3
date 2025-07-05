@@ -15,6 +15,7 @@ type CardProps = {
     transform: string;
     isShuffling: boolean;
     isBinding: boolean;
+    isVertical: boolean;
     zIndex: number;
     dataCardIndex: number;
     handleMouseDown: (e: React.MouseEvent | React.TouchEvent | React.PointerEvent) => void;
@@ -38,6 +39,7 @@ export default function Card({
     transform,
     isShuffling,
     isBinding,
+    isVertical,
     zIndex,
     dataCardIndex
 }: CardProps) {
@@ -64,7 +66,7 @@ export default function Card({
                 height: 'auto',
                 transform: transform,
                 cursor: 'pointer',
-                transition: isShuffling || isBinding ? 'all 1s ease-in-out' : 'none',
+                transition: isShuffling || isBinding || isVertical ? 'all 1s ease-in-out' : 'none',
                 zIndex: zIndex
             }}
         />

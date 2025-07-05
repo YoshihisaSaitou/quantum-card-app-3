@@ -21,12 +21,14 @@ type CardData = {
 export type CardListHandle = {
     shuffleCards: () => void;
     bindCards: () => void;
+    verticalCards: () => void;
 };
 
 const CardList = forwardRef<CardListHandle>((_, ref) => {
     const [cardList, setCardList] = useState<CardData[]>([]);
     const [isShuffling, setIsShuffling] = useState<boolean>(false);
     const [isBinding, setIsBinding] = useState<boolean>(false);
+    const [isVertical, setIsVertical] = useState<boolean>(false);
     const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
     const [zIndexCount, setZIndexCount] = useState<number>(200);
     const [startMouseDownX, setStartMouseDownX] = useState<number>(0);
@@ -36,7 +38,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
 
     useImperativeHandle(ref, () => ({
         shuffleCards,
-        bindCards
+        bindCards,
+        verticalCards
     }));
 
     useEffect(() => {
@@ -59,7 +62,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     }, []);
 
     const shuffleCards = () => {
-        console.log('シャッフル処理を実行');
+        //console.log('シャッフル処理を実行');
         if (isShuffling) return;
         setIsShuffling(true);
 
@@ -93,7 +96,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     };
 
     const bindCards = () => {
-        console.log('束ねる処理を実行');
+        //console.log('束ねる処理を実行');
         if (isBinding) return;
         setIsBinding(true);
 
@@ -120,6 +123,24 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         // アニメーション完了後に状態をリセット
         setTimeout(() => {
             setIsBinding(false);
+        }, 1000);
+    };
+
+    const verticalCards = () => {
+        console.log('縦にする処理を実行');
+        if (isVertical) return;
+        setIsVertical(true);
+
+        // 縦にする処理
+        const newCardList = cardList.map((card) => ({
+            ...card,
+            transform: `rotate(${getRandom(0, 1) ? 180 : 0}deg)`,
+        }));
+        setCardList(newCardList);
+
+        // アニメーション完了後に状態をリセット
+        setTimeout(() => {
+            setIsVertical(false);
         }, 1000);
     };
 
@@ -152,7 +173,11 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             const cardIndex = parseInt(target.dataset.cardIndex || '0');
             return prevList.map((card, index) =>
                 index === cardIndex
-                    ? { ...card, left: `${newLeft}px`, top: `${newTop}px` }
+                    ? {
+                        ...card,
+                        left: `${newLeft}px`,
+                        top: `${newTop}px`
+                    }
                     : card
             );
         });
@@ -172,16 +197,32 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             const cardIndex = parseInt(target.dataset.cardIndex || '0');
             return prevList.map((card, index) =>
                 index === cardIndex
-                    ? { ...card, left: `${newLeft}px`, top: `${newTop}px` }
+                    ? {
+                        ...card,
+                        left: `${newLeft}px`,
+                        top: `${newTop}px`
+                    }
                     : card
             );
         });
     }
 
-    function handleDoubleClick(e: React.MouseEvent | React.TouchEvent | React.PointerEvent, index: number) {
+    function handleDoubleClick(e: React.MouseEvent | React.TouchEvent | React.PointerEvent) {
         e.stopPropagation();
         const target = e.currentTarget as HTMLImageElement;
-        target.src = target.src.includes(getCardBackFileName()) ? cardList[index].face_up_file_name : getCardBackFileName();
+        //target.src = target.src.includes(getCardBackFileName()) ? cardList[index].face_up_file_name : getCardBackFileName();
+        // React状態を更新
+        setCardList(prevList => {
+            const cardIndex = parseInt(target.dataset.cardIndex || '0');
+            return prevList.map((card, index) =>
+                index === cardIndex
+                    ? {
+                        ...card,
+                        src: card.src.includes(getCardBackFileName()) ? card.face_up_file_name : getCardBackFileName()
+                    }
+                    : card
+            );
+        });
     }
 
     return (
@@ -196,13 +237,14 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
                     handleMouseDown={handleMouseDown}
                     handleMouseMove={handleMouseMove}
                     handleMouseUp={handleMouseUp}
-                    handleDoubleClick={(e) => handleDoubleClick(e, index)}
+                    handleDoubleClick={handleDoubleClick}
                     top={value.top}
                     left={value.left}
                     width={value.width}
                     transform={value.transform}
                     isShuffling={isShuffling}
                     isBinding={isBinding}
+                    isVertical={isVertical}
                     zIndex={value.zIndex}
                     dataCardIndex={index}
                 />

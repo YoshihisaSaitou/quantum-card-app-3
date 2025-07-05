@@ -7,7 +7,8 @@ import MainSection from '../components/MainSection';
 export default function Home() {
     const mainSectionRef = useRef<{
         handleShuffle: () => void,
-        handleBind: () => void
+        handleBind: () => void,
+        handleVertical: () => void
     } | null>(null);
 
     const handleShuffle = () => {
@@ -22,11 +23,18 @@ export default function Home() {
         }
     };
 
+    const handleVertical = () => {
+        if (mainSectionRef.current) {
+            mainSectionRef.current.handleVertical();
+        }
+    };
+
     return (
         <div className="m-0 p-0 overflow-hidden bg-[#ccb7e0] min-h-screen">
             <NavSection
                 onShuffle={handleShuffle}
                 onBind={handleBind}
+                onVertical={handleVertical}
             />
             <MainSection ref={mainSectionRef} />
         </div>
