@@ -2,9 +2,10 @@
 
 type NavSectionProps = {
     onShuffle: () => void;
+    onBind: () => void;
 }
 
-export default function NavSection({ onShuffle }: NavSectionProps) {
+export default function NavSection({ onShuffle, onBind }: NavSectionProps) {
     return (
         <div className="absolute top-0 right-0">
             <nav>
@@ -15,7 +16,12 @@ export default function NavSection({ onShuffle }: NavSectionProps) {
                     >
                         混ぜる
                     </li>
-                    <li className="cursor-pointer hover:text-blue-500 transition-colors">束ねる</li>
+                    <li
+                        className="cursor-pointer hover:text-blue-500 transition-colors"
+                        onClick={onBind}
+                    >
+                        束ねる
+                    </li>
                     <li className="cursor-pointer hover:text-blue-500 transition-colors">縦にする</li>
                 </ul>
             </nav>

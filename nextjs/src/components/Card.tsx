@@ -14,7 +14,9 @@ type CardProps = {
     width: string;
     transform: string;
     isShuffling: boolean;
+    isBinding: boolean;
     zIndex: number;
+    dataCardIndex: number;
     handleMouseDown: (e: React.MouseEvent | React.TouchEvent | React.PointerEvent) => void;
     handleMouseMove: (e: React.MouseEvent | React.TouchEvent | React.PointerEvent) => void;
     handleMouseUp: (e: React.MouseEvent | React.TouchEvent | React.PointerEvent) => void;
@@ -35,7 +37,9 @@ export default function Card({
     width,
     transform,
     isShuffling,
-    zIndex
+    isBinding,
+    zIndex,
+    dataCardIndex
 }: CardProps) {
     const imgRef = useRef<HTMLImageElement>(null);
 
@@ -44,6 +48,7 @@ export default function Card({
             ref={imgRef}
             src={src || getCardBackFileName()}
             alt={name + commentary + faceUpFileName}
+            data-card-index={dataCardIndex}
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -59,7 +64,7 @@ export default function Card({
                 height: 'auto',
                 transform: transform,
                 cursor: 'pointer',
-                transition: isShuffling ? 'all 1s ease-in-out' : 'none',
+                transition: isShuffling || isBinding ? 'all 1s ease-in-out' : 'none',
                 zIndex: zIndex
             }}
         />

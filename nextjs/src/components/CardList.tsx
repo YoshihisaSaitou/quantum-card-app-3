@@ -7,6 +7,7 @@ import { getPointerPosition } from '@/lib/EventUtility';
 import Card from './Card';
 
 type CardData = {
+    src: string;
     name: string;
     commentary: string;
     face_up_file_name: string;
@@ -19,11 +20,13 @@ type CardData = {
 
 export type CardListHandle = {
     shuffleCards: () => void;
+    bindCards: () => void;
 };
 
 const CardList = forwardRef<CardListHandle>((_, ref) => {
     const [cardList, setCardList] = useState<CardData[]>([]);
     const [isShuffling, setIsShuffling] = useState<boolean>(false);
+    const [isBinding, setIsBinding] = useState<boolean>(false);
     const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
     const [zIndexCount, setZIndexCount] = useState<number>(200);
     const [startMouseDownX, setStartMouseDownX] = useState<number>(0);
@@ -32,7 +35,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     const [startMouseDownLeft, setStartMouseDownLeft] = useState<number>(0);
 
     useImperativeHandle(ref, () => ({
-        shuffleCards
+        shuffleCards,
+        bindCards
     }));
 
     useEffect(() => {
@@ -43,6 +47,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const tmpList = getCardList();
         const dataList = tmpList.map(value => ({
             ...value,
+            src: getCardBackFileName(),
             top: `${getRandom(0, innerWidth / 2)}px`,
             left: `${getRandom(0, innerHeight / 2)}px`,
             width: `100px`,
@@ -54,26 +59,67 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     }, []);
 
     const shuffleCards = () => {
+        console.log('シャッフル処理を実行');
         if (isShuffling) return;
         setIsShuffling(true);
 
         const innerWidth = window.innerWidth;
         const innerHeight = window.innerHeight;
 
+        // zIndex用の重複しないランダム配列を生成
+        const count = cardList.length;
+        const zIndexArray = Array.from({ length: count }, (_, i) => i + 1);
+        // フィッシャー–イェーツのシャッフルアルゴリズム
+        for (let i = zIndexArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [zIndexArray[i], zIndexArray[j]] = [zIndexArray[j], zIndexArray[i]];
+        }
+
         // アニメーション用の新しい位置を生成
-        const newCardList = cardList.map(card => ({
+        const newCardList = cardList.map((card, index) => ({
             ...card,
+            src: getCardBackFileName(),
             top: `${getRandom(0, innerWidth / 2)}px`,
             left: `${getRandom(0, innerHeight / 2)}px`,
             transform: `rotate(${getRandom(0, 360)}deg)`,
-            zIndex: getRandom(1, 100)
+            zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
-
         setCardList(newCardList);
 
         // アニメーション完了後に状態をリセット
         setTimeout(() => {
             setIsShuffling(false);
+        }, 1000);
+    };
+
+    const bindCards = () => {
+        console.log('束ねる処理を実行');
+        if (isBinding) return;
+        setIsBinding(true);
+
+        // zIndex用の重複しないランダム配列を生成
+        const count = cardList.length;
+        const zIndexArray = Array.from({ length: count }, (_, i) => i + 1);
+        // フィッシャー–イェーツのシャッフルアルゴリズム
+        for (let i = zIndexArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [zIndexArray[i], zIndexArray[j]] = [zIndexArray[j], zIndexArray[i]];
+        }
+
+        // 束ねる処理
+        const newCardList = cardList.map((card, index) => ({
+            ...card,
+            src: getCardBackFileName(),
+            top: '16px', // 縦に並べる
+            left: '16px',
+            transform: `rotate(${getRandom(0, 1) ? 180 : 0}deg)`,
+            zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
+        }));
+        setCardList(newCardList);
+
+        // アニメーション完了後に状態をリセット
+        setTimeout(() => {
+            setIsBinding(false);
         }, 1000);
     };
 
@@ -98,8 +144,18 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         e.stopPropagation();
         const { pageX, pageY } = getPointerPosition(e);
         const target = e.currentTarget as HTMLImageElement;
-        target.style.left = `${startMouseDownLeft - (startMouseDownX - pageX)}px`;
-        target.style.top = `${startMouseDownTop - (startMouseDownY - pageY)}px`;
+        const newLeft = startMouseDownLeft - (startMouseDownX - pageX);
+        const newTop = startMouseDownTop - (startMouseDownY - pageY);
+
+        // React状態を更新
+        setCardList(prevList => {
+            const cardIndex = parseInt(target.dataset.cardIndex || '0');
+            return prevList.map((card, index) =>
+                index === cardIndex
+                    ? { ...card, left: `${newLeft}px`, top: `${newTop}px` }
+                    : card
+            );
+        });
     }
 
     function handleMouseUp(e: React.MouseEvent | React.TouchEvent | React.PointerEvent) {
@@ -108,8 +164,18 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         setIsMouseDown(false);
         const { pageX, pageY } = getPointerPosition(e);
         const target = e.currentTarget as HTMLImageElement;
-        target.style.left = `${startMouseDownLeft - (startMouseDownX - pageX)}px`;
-        target.style.top = `${startMouseDownTop - (startMouseDownY - pageY)}px`;
+        const newLeft = startMouseDownLeft - (startMouseDownX - pageX);
+        const newTop = startMouseDownTop - (startMouseDownY - pageY);
+
+        // React状態を更新
+        setCardList(prevList => {
+            const cardIndex = parseInt(target.dataset.cardIndex || '0');
+            return prevList.map((card, index) =>
+                index === cardIndex
+                    ? { ...card, left: `${newLeft}px`, top: `${newTop}px` }
+                    : card
+            );
+        });
     }
 
     function handleDoubleClick(e: React.MouseEvent | React.TouchEvent | React.PointerEvent, index: number) {
@@ -123,7 +189,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             {cardList.map((value: CardData, index: number) => (
                 <Card
                     key={index}
-                    src=''
+                    src={value.src}
                     name={value.name}
                     commentary={value.commentary}
                     faceUpFileName={value.face_up_file_name}
@@ -136,7 +202,9 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
                     width={value.width}
                     transform={value.transform}
                     isShuffling={isShuffling}
+                    isBinding={isBinding}
                     zIndex={value.zIndex}
+                    dataCardIndex={index}
                 />
             ))}
         </>

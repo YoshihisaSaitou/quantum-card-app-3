@@ -5,7 +5,10 @@ import NavSection from '../components/NavSection';
 import MainSection from '../components/MainSection';
 
 export default function Home() {
-    const mainSectionRef = useRef<{ handleShuffle: () => void } | null>(null);
+    const mainSectionRef = useRef<{
+        handleShuffle: () => void,
+        handleBind: () => void
+    } | null>(null);
 
     const handleShuffle = () => {
         if (mainSectionRef.current) {
@@ -13,9 +16,18 @@ export default function Home() {
         }
     };
 
+    const handleBind = () => {
+        if (mainSectionRef.current) {
+            mainSectionRef.current.handleBind();
+        }
+    };
+
     return (
         <div className="m-0 p-0 overflow-hidden bg-[#ccb7e0] min-h-screen">
-            <NavSection onShuffle={handleShuffle} />
+            <NavSection
+                onShuffle={handleShuffle}
+                onBind={handleBind}
+            />
             <MainSection ref={mainSectionRef} />
         </div>
     );

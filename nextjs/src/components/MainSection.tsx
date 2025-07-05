@@ -5,17 +5,26 @@ import CardList from '../components/CardList';
 
 export type MainSectionHandle = {
     handleShuffle: () => void;
+    handleBind: () => void;
 };
 
 const MainSection = forwardRef<MainSectionHandle>((_, ref) => {
     const mainRef = useRef<HTMLElement | null>(null);
     const [showCard, setShowCard] = useState(false);
-    const cardListRef = useRef<{ shuffleCards: () => void } | null>(null);
+    const cardListRef = useRef<{
+        shuffleCards: () => void,
+        bindCards: () => void,
+    } | null>(null);
 
     useImperativeHandle(ref, () => ({
         handleShuffle: () => {
             if (cardListRef.current) {
                 cardListRef.current.shuffleCards();
+            }
+        },
+        handleBind: () => {
+            if (cardListRef.current) {
+                cardListRef.current.bindCards();
             }
         }
     }));
