@@ -5,28 +5,44 @@ import CardList from '../components/CardList';
 
 export type MainSectionHandle = {
     handleShuffle: () => void;
+    handleBind: () => void;
+    handleVertical: () => void;
 };
 
 const MainSection = forwardRef<MainSectionHandle>((_, ref) => {
     const mainRef = useRef<HTMLElement | null>(null);
     const [showCard, setShowCard] = useState(false);
-    const cardListRef = useRef<{ shuffleCards: () => void } | null>(null);
+    const cardListRef = useRef<{
+        shuffleCards: () => void,
+        bindCards: () => void,
+        verticalCards: () => void
+    } | null>(null);
 
     useImperativeHandle(ref, () => ({
         handleShuffle: () => {
             if (cardListRef.current) {
                 cardListRef.current.shuffleCards();
             }
+        },
+        handleBind: () => {
+            if (cardListRef.current) {
+                cardListRef.current.bindCards();
+            }
+        },
+        handleVertical: () => {
+            if (cardListRef.current) {
+                cardListRef.current.verticalCards();
+            }
         }
     }));
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (mainRef.current) {
             console.log('mainタグのDOM要素:', mainRef.current);
             console.log('高さ:', mainRef.current.offsetHeight);
             console.log('幅:', mainRef.current.offsetWidth);
         }
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         const timer = setTimeout(() => setShowCard(true), 500);
