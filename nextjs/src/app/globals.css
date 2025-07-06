@@ -25,7 +25,7 @@
 
     html,
     body {
-        @apply overscroll-x-contain;
+        @apply overscroll-contain;
     }
 }
 
