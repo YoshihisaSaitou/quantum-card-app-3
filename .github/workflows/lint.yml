@@ -21,11 +21,7 @@ jobs:
           cache: npm
           cache-dependency-path: nextjs/package-lock.json
       - run: npm ci
-      - run: npx eslint . \
-            --ext .js,.jsx,.ts,.tsx \
-            --max-warnings 0 \
-            --format json \
-            --output-file eslint-report.json
+      - run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0 --format json --output-file eslint-report.json
       - uses: ataylorme/eslint-annotate-action@v3
         if: always()
         with:
