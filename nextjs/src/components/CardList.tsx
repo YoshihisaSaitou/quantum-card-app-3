@@ -46,14 +46,19 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const innerWidth = window.innerWidth;
         const innerHeight = window.innerHeight;
 
+        console.log('innerWidth:', innerWidth);
+        console.log('Math.round(innerWidth / 2):', Math.round(innerWidth / 2));
+        console.log('innerHeight:', innerHeight);
+        console.log('Math.round(innerHeight / 2):', Math.round(innerHeight / 2));
+
         // カード初期化
         const tmpList = getCardList();
         const dataList = tmpList.map(value => ({
             ...value,
             src: getCardBackFileName(),
-            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
-            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
-            width: `100px`,
+            top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            width: `clamp(3.125rem, 1.654rem + 7.35vw, 6.25rem)`,
             transform: `0deg`,
             zIndex: getRandom(1, 100)
         }));
@@ -82,8 +87,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const newCardList = cardList.map((card, index) => ({
             ...card,
             src: getCardBackFileName(),
-            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
-            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
             transform: `rotate(${getRandom(0, 360)}deg)`,
             zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
