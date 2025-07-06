@@ -46,11 +46,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const innerWidth = window.innerWidth;
         const innerHeight = window.innerHeight;
 
-        console.log('innerWidth:', innerWidth);
-        console.log('Math.round(innerWidth / 2):', Math.round(innerWidth / 2));
-        console.log('innerHeight:', innerHeight);
-        console.log('Math.round(innerHeight / 2):', Math.round(innerHeight / 2));
-
         // カード初期化
         const tmpList = getCardList();
         const dataList = tmpList.map(value => ({
@@ -67,7 +62,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     }, []);
 
     const shuffleCards = () => {
-        //console.log('シャッフル処理を実行');
         if (isShuffling) return;
         setIsShuffling(true);
 
@@ -101,7 +95,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     };
 
     const bindCards = () => {
-        //console.log('束ねる処理を実行');
         if (isBinding) return;
         setIsBinding(true);
 
@@ -132,7 +125,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     };
 
     const verticalCards = () => {
-        console.log('縦にする処理を実行');
         if (isVertical) return;
         setIsVertical(true);
 
