@@ -51,8 +51,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const dataList = tmpList.map(value => ({
             ...value,
             src: getCardBackFileName(),
-            top: `${getRandom(0, innerWidth / 2)}px`,
-            left: `${getRandom(0, innerHeight / 2)}px`,
+            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
             width: `100px`,
             transform: `0deg`,
             zIndex: getRandom(1, 100)
@@ -82,8 +82,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const newCardList = cardList.map((card, index) => ({
             ...card,
             src: getCardBackFileName(),
-            top: `${getRandom(0, innerWidth / 2)}px`,
-            left: `${getRandom(0, innerHeight / 2)}px`,
+            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
             transform: `rotate(${getRandom(0, 360)}deg)`,
             zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
