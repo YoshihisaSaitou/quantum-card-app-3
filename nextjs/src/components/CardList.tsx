@@ -51,9 +51,9 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const dataList = tmpList.map(value => ({
             ...value,
             src: getCardBackFileName(),
-            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
-            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
-            width: `100px`,
+            top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            width: `clamp(3.125rem, 1.654rem + 7.35vw, 6.25rem)`,
             transform: `0deg`,
             zIndex: getRandom(1, 100)
         }));
@@ -62,7 +62,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     }, []);
 
     const shuffleCards = () => {
-        //console.log('シャッフル処理を実行');
         if (isShuffling) return;
         setIsShuffling(true);
 
@@ -82,8 +81,8 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
         const newCardList = cardList.map((card, index) => ({
             ...card,
             src: getCardBackFileName(),
-            top: `${getRandom(0, Math.round(innerWidth / 2))}px`,
-            left: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
             transform: `rotate(${getRandom(0, 360)}deg)`,
             zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
@@ -96,7 +95,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     };
 
     const bindCards = () => {
-        //console.log('束ねる処理を実行');
         if (isBinding) return;
         setIsBinding(true);
 
@@ -127,7 +125,6 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
     };
 
     const verticalCards = () => {
-        console.log('縦にする処理を実行');
         if (isVertical) return;
         setIsVertical(true);
 
