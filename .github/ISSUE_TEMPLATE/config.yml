@@ -1,5 +1,1 @@
-blank_issues_enabled: false   # 未分類の Issue を禁止
-contact_links:
-  - name: 質問・相談はこちら
-    url: https://github.com/<ORG>/<REPO>/discussions
-    about: 不具合でも要望でもない一般的な質問は Discussion をご利用ください
+blank_issues_enabled: false
