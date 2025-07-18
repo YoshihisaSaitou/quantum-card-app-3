@@ -1,0 +1,6 @@
+name: "CodeQL config"
+
+# 解析対象に含めないディレクトリ／ファイル
+paths-ignore:
+  - docs/** # 自動生成コード
+  - nextjs/docs/** # 自動生成コード
