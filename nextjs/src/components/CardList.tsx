@@ -52,7 +52,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             ...value,
             src: getCardBackFileName(),
             top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
-            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2)) + 50}px`,
             width: `clamp(3.125rem, 1.654rem + 7.35vw, 6.25rem)`,
             transform: `0deg`,
             zIndex: getRandom(1, 100)
@@ -82,7 +82,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             ...card,
             src: getCardBackFileName(),
             top: `${getRandom(0, Math.round(innerHeight / 2))}px`,
-            left: `${getRandom(0, Math.round(innerWidth / 2))}px`,
+            left: `${getRandom(0, Math.round(innerWidth / 2)) + 50}px`,
             transform: `rotate(${getRandom(0, 360)}deg)`,
             zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
@@ -112,7 +112,7 @@ const CardList = forwardRef<CardListHandle>((_, ref) => {
             ...card,
             src: getCardBackFileName(),
             top: '16px', // 縦に並べる
-            left: '16px',
+            left: '32px',
             transform: `rotate(${getRandom(0, 1) ? 180 : 0}deg)`,
             zIndex: zIndexArray[index] // ランダムなz-indexを割り当て
         }));
