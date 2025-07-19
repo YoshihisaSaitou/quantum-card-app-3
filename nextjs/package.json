@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
-        "postbuild": "rm -rf docs && mv out docs && touch docs/.nojekyll && node scripts/pathfix.mjs",
+        "postbuild": "rm -rf docs && cp -r out docs && touch docs/.nojekyll && node scripts/pathfix.mjs && npx eslint . --max-warnings 0 --format json --output-file eslint-report.json",
         "start": "next start",
         "lint": "next lint"
     },
